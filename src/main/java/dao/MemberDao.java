@@ -30,7 +30,7 @@ public class MemberDao {
 	}
 	
 	// 2) 회원가입 dao
-	public int signinDao(Connection conn, Member member) throws Exception {
+	public int insertMemberDao(Connection conn, Member member) throws Exception {
 		int resultLow = 0;
 		
 		String sql = "INSERT INTO"

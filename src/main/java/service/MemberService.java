@@ -37,7 +37,7 @@ public class MemberService {
 	}
 	
 	// 2) 회원가입 service
-	public int selectBoardOneService(Member member) {
+	public int insertMemberService(Member member) {
 		int resultRow = 0;
 		
 		this.dbUtil = new DBUtil();
@@ -45,7 +45,58 @@ public class MemberService {
 		Connection conn = null;
 		try {
 			conn = dbUtil.getConnection();
-			resultRow = memberDao.signinDao(conn, member);
+			resultRow = memberDao.insertMemberDao(conn, member);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return resultRow;
+	}
+	
+	// 3) 회원수정 service
+	public int updateMemberService(Member member) {
+		int resultRow = 0;
+		
+		this.dbUtil = new DBUtil();
+		this.memberDao = new MemberDao();
+		Connection conn = null;
+		try {
+			conn = dbUtil.getConnection();
+			resultRow = memberDao.updateMemberDao(conn, member);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return resultRow;
+	}
+	// 4) 회원삭제 service
+	public int deleteMemberService(Member member) {
+		int resultRow = 0;
+		
+		this.dbUtil = new DBUtil();
+		this.memberDao = new MemberDao();
+		Connection conn = null;
+		try {
+			conn = dbUtil.getConnection();
+			resultRow = memberDao.deleteMemberDao(conn, member);
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {

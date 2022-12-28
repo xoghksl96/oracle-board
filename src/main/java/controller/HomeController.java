@@ -21,5 +21,7 @@ public class HomeController extends HttpServlet {
 		// 2) 회원정보 상세보기
 		// 3) 게시판 리스트
 		// forward -> /WEB-INF/view/home.jsp
+		
+		request.getRequestDispatcher("/WEB-INF/view/home.jsp");
 	}
 }

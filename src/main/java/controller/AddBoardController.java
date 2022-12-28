@@ -19,7 +19,7 @@ public class AddBoardController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 로그인 유효성 검사
 		
-		request.getRequestDispatcher("/WEB-INF/view/insertBoardForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/board/insertBoardForm.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -32,7 +32,7 @@
 		});
 	});
 </script>
-<title>회원수정 페이지</title>
+<title>회원수정</title>
 </head>
 <body>
 	<jsp:include page="/inc/menuForMember.jsp"></jsp:include>	

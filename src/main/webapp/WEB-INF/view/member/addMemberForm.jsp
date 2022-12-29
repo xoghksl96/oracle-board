@@ -52,7 +52,7 @@
 		});
 	});
 </script>
-<title>회원가입 페이지</title>
+<title>회원가입</title>
 </head>
 <body>
 	<jsp:include page="/inc/menu.jsp"></jsp:include>

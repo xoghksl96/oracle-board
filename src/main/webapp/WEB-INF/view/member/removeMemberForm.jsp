@@ -45,7 +45,7 @@
 		});
 	});
 </script>
-<title>회원탈퇴 페이지</title>
+<title>회원탈퇴</title>
 </head>
 <body>
 	<jsp:include page="/inc/menuForMember.jsp"></jsp:include>	

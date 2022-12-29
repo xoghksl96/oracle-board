@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/bootstrap.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<title>Insert title here</title>
+<title>Home</title>
 </head>
 <body style="background-color : #505050">
 

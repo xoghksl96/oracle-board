@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../css/bootstrap.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<title>회원정보 페이지</title>
+<title>회원정보</title>
 </head>
 <body>
 	<jsp:include page="/inc/menuForMember.jsp"></jsp:include>	

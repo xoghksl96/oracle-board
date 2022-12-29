@@ -31,7 +31,7 @@
 		});
 	});
 </script>
-<title>로그인 페이지</title>
+<title>로그인</title>
 </head>
 <body>
 	<jsp:include page="/inc/menu.jsp"></jsp:include>

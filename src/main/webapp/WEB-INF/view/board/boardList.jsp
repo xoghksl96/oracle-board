@@ -17,7 +17,7 @@
 		})
 	});
 </script>
-<title>Insert title here</title>
+<title>게시판</title>
 </head>
 <body>
 

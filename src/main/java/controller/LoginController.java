@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import service.MemberService;
 import vo.Member;
 
 /**
@@ -15,7 +16,7 @@ import vo.Member;
  */
 @WebServlet("/member/login")
 public class LoginController extends HttpServlet {
-	
+	private MemberService memberService;
 	// Form
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// view -> /WEB-INF/view/member/addMember.jsp
@@ -27,17 +28,34 @@ public class LoginController extends HttpServlet {
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		
 		if(loginMember != null) {
-			String target = request.getContextPath()+"/HomeController";
+			String target = request.getContextPath()+"/home";
 			response.sendRedirect(target);
 			return;
 		}
 		
-		// 회원가입 폼 View
-		request.getRequestDispatcher("/WEB-INF/view/loginForm.jsp").forward(request, response);
+		// 로그인 폼 View
+		request.setAttribute("nowPage", "login");
+		request.getRequestDispatcher("/WEB-INF/view/member/loginForm.jsp").forward(request, response);
 	}
 
 	// Action
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		this.memberService = new MemberService();
+		
+		String memberId = request.getParameter("memberId");
+		String memberPw = request.getParameter("memberPw");
+		
+		Member member = new Member();
+		member.setMemberId(memberId);
+		member.setMemberPw(memberPw);
+		
+		Member loginMember = memberService.loginService(member);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("loginMember", loginMember);
+		
+		response.sendRedirect(request.getContextPath()+"/home");
 		// redirect -> /home
 		// 로그인 세션 정보 : session.setAttribute("loginMember", Member타입)
 	}

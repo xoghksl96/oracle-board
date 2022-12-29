@@ -6,6 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import vo.Member;
 
 
 @WebServlet("/home")
@@ -22,6 +25,7 @@ public class HomeController extends HttpServlet {
 		// 3) 게시판 리스트
 		// forward -> /WEB-INF/view/home.jsp
 		
-		request.getRequestDispatcher("/WEB-INF/view/home.jsp");
+		request.setAttribute("nowPage", "home");
+		request.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(request, response);
 	}
 }

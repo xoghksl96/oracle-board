@@ -6,9 +6,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import service.BoardService;
 import vo.Board;
+import vo.Member;
 
 @WebServlet("/board/modifyBoard")
 public class ModifyBoardController extends HttpServlet {
@@ -17,40 +19,55 @@ public class ModifyBoardController extends HttpServlet {
 	// Form
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 로그인 유효성 검사
+		HttpSession session = request.getSession();
 		
-				int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-				
-				this.boardService = new BoardService();
-				Board board = boardService.selectBoardOneService(boardNo);
-				
-				request.setAttribute("board", board);
-				
-				request.getRequestDispatcher("WEB-INF/view/updateBoardForm.jsp").forward(request, response);
+		// 로그인 여부확인, 로그인 되어있을 경우 회원페이지로 이동
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		
+		if(loginMember == null) {
+			String target = request.getContextPath()+"/home";
+			response.sendRedirect(target);
+			return;
+		}
+		
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		
+		this.boardService = new BoardService();
+		Board board = boardService.selectBoardOneService(boardNo);
+		
+		request.setAttribute("board", board);
+		request.setAttribute("nowPage", "board");
+		request.getRequestDispatcher("/WEB-INF/view/board/modifyBoardForm.jsp").forward(request, response);
 	}
 
 	// Action
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("loginMember");
+		
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		String boardTitle = request.getParameter("boardTitle");
 		String boardContent = request.getParameter("boardContent");
+		String memberId = member.getMemberId();
 		
 		Board board = new Board();
 		board.setBoardNo(boardNo);
 		board.setBoardTitle(boardTitle);
 		board.setBoardContent(boardContent);
+		board.setMemberId(memberId);
 		
 		this.boardService = new BoardService();
 		
 		if(boardService.updateBoardService(board) != 1) {
 			System.out.println("수정 실패");
-			request.getRequestDispatcher("/UpdateBoardFormController").forward(request, response);
+			response.sendRedirect(request.getContextPath()+"/board/modifyBoard");
 			return;
 		}
 		
 		System.out.println("수정 성공");
-		request.getRequestDispatcher("/BoardOneController").forward(request, response);
+		response.sendRedirect(request.getContextPath()+"/board/boardOne?boardNo="+boardNo);
 	}
 
 }

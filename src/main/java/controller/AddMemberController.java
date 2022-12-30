@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -60,8 +62,10 @@ public class AddMemberController extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("회원가입 성공");
-		response.sendRedirect(request.getContextPath()+"/home");
+		String message = "회원가입 성공!";
+		System.out.println(message);
+		message = URLEncoder.encode(message, "UTF-8");
+		response.sendRedirect(request.getContextPath()+"/home?message="+message);
 	}
 
 }

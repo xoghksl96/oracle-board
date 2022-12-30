@@ -30,7 +30,7 @@
 			
 			<tr>
 				<th class="table-info" style="width : 20%; text-align : center; vertical-align : middle;">CONTENT</th>
-				<td style="width : 80%; text-align : center;">${board.boardContent}</td>
+				<td style="width : 80%; text-align : center;"><textarea style="width: 90%; height:300px;"readonly="readonly">${board.boardContent}</textarea></td>
 			</tr>
 			
 			<tr>

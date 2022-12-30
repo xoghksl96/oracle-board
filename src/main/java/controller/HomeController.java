@@ -26,6 +26,7 @@ public class HomeController extends HttpServlet {
 		// forward -> /WEB-INF/view/home.jsp
 		
 		request.setAttribute("nowPage", "home");
+		request.setAttribute("message", request.getParameter("message"));
 		request.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(request, response);
 	}
 }

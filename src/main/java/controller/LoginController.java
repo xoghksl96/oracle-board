@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -55,7 +57,9 @@ public class LoginController extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("loginMember", loginMember);
 		
-		response.sendRedirect(request.getContextPath()+"/home");
+		String message = "로그인 성공!";
+		message = URLEncoder.encode(message, "UTF-8");
+		response.sendRedirect(request.getContextPath()+"/home?message="+message);
 		// redirect -> /home
 		// 로그인 세션 정보 : session.setAttribute("loginMember", Member타입)
 	}
